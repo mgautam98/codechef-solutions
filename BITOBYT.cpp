@@ -1,29 +1,43 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+
 using namespace std;
 
-int main()
-{
-    int t, n;
-    cin>>t;
-    while (t--) {
-        cin>>n;
-        int a[3] = {0}, times = 0, num=n;
-        int i=1;
-        if(n>=26){
-          num = n%26;
-          times = n/26;
-        }
-        a[0] = a[1] = a[2] = times;
-        if(num!=0){
-          if(num>10){
-            a[2]++;
-          }else if(num>2){
-            a[1]++;
-          }else{
-            a[0]++;
-          }
-        }
-        cout<<a[0]<<" "<<a[1]<<" "<<a[2]<<endl;
-    }
-    return 0;
+const int MaxN = (int)2e2 + 10;
+const int INF = (int)1e9;
+const int MOD = 998244353;
+
+int main() {
+	int q;
+	scanf("%d", &q);
+	while (q --> 0) {
+		int t;
+		scanf("%d", &t);
+		t--;
+		long long now = 1;
+		int who = 0, timer = 0;
+		while (true) {
+			if (who == 0) {
+				if (timer + 2 > t) {
+					break;
+				}
+				timer += 2;
+			} else if (who == 1) {
+				if (timer + 8 > t) {
+					break;
+				}
+				timer += 8;
+			} else {
+				if (timer + 16 > t) {
+					break;
+				}
+				timer += 16;
+				now *= 2;
+			}
+			who = (who + 1) % 3;
+		}
+		long long ar[3] = {};
+		ar[who] = now;
+		cout << ar[0] << " " << ar[1] << " " << ar[2] << "\n";
+	}
+	return 0;
 }
