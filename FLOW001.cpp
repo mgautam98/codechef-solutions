@@ -10,4 +10,3 @@ main()
         cout<<a+b<<endl;
     }
 }
-s
