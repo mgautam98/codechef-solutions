@@ -8,38 +8,34 @@ int main() {
   cin>>t;
   while(t--){
     cin>>n>>m;
-    priority_queue <int, vector<int>, greater<int>> completed;
+    priority_queue <int, vector<int>, greater<int>> completedE, completedO;
     int temp;
 
     for(int i=0; i<m; i++){
       cin>>temp;
-      completed.push(temp);
+      if(temp&1){
+        completedO.push(temp);
+      }else{
+        completedE.push(temp);
+      }
     }
 
-    vector <int> t1, t2;
-    bool turn = true;
-    for(int i=1; i<=n; i++){
-      if(i==completed.top()){
-        completed.pop();
+    for(int i=1; i<=n; i+=2){
+      if(i==completedO.top()){
+        completedO.pop();
         continue;
       }
-      if(turn){
-        t1.push_back(i);
-        turn = false;
-      }else{
-        t2.push_back(i);
-        turn = true;
-      }
-    }
-
-    for(auto i:t1){
       cout<<i<<" ";
     }
     cout<<"\n";
-    for(auto i:t2){
+
+    for(int i=2; i<=n; i+=2){
+      if(i==completedE.top()){
+        completedE.pop();
+        continue;
+      }
       cout<<i<<" ";
     }
-
     cout<<"\n";
   }
 	return 0;
