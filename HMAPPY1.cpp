@@ -7,15 +7,15 @@ const int INF = (int)1e9;
 const int MOD = 100000007;
 #define ll long long int
 
-int count(vector<int> a){
-    int m = -1*INF;
+ll count(vector<ll> a){
+    ll m = 0;
     
     int count = 0;
     for(auto item:a){
         if(item==1){
             count++;
         }else{
-            m = max(m, count);
+            m = (m>=count)?m:count;
             count = 0;
         }
     }
@@ -23,17 +23,17 @@ int count(vector<int> a){
 }
 
 int main() {
-    int n, q, k, temp;
+    ll n, q, k, temp;
     string str;
     cin>>n>>q>>k;
-    vector<int> a;
-    for(int i=0; i<n; i++){
+    vector<ll> a;
+    for(ll i=0; i<n; i++){
         cin>>temp;
         a.push_back(temp);
     }
     cin>>str;
-    int len = str.length();
-    int i=0;
+    ll len = str.length();
+    ll i=0;
 
     while(q--){
         char ch = str[i];
@@ -41,7 +41,12 @@ int main() {
             rotate(a.begin(), a.begin() + a.size() - 1, a.end());
         }
         else if(ch=='?'){
-            cout<<min(k, count(a))<<endl;
+            ll ans = count(a);
+            if(ans<=k){
+                cout<<ans<<endl;
+            }else{
+                cout<<k<<endl;
+            }
         }
         i++;
     }
