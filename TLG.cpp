@@ -1,37 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main()
+int main ()
 {
-    int n, x, y;
-    cin>>n>>x>>y;
+    int N;
+    scanf ("%d", &N);
 
-    int lead1=0, lead2=0, count1=0;
+    int player_1 = 0;
+    int player_2 = 0;
+    int lead;
+    int max_lead = 0;
+    int lead_player;
+    int winner;
 
-    if(x>y){
-       lead1 = x-y;
-       count1++;
-     }
-    else lead2 = y-x;
+    while ( N-- ) {
 
-    for(int i=0; i<n; i++){
-      int x, y;
-      cin>>x>>y;
+        int S, T;
+        scanf ("%d %d", &S, &T);
 
-      if(x>y){
-        count1++;
-        int diff = x - y;
-        lead1 = max(lead1, diff);
-      }else{
-        int diff = y - x;
-        lead2 = max(lead2, diff);
-      }
+        player_1 += S;
+        player_2 += T;
+
+        lead = player_1 - player_2;
+        lead_player = 1;
+
+        if ( lead < 0 ) {
+            lead *= -1;
+            lead_player = 2;
+        }
+
+        if ( lead > max_lead ) {
+            max_lead = lead;
+            winner = lead_player;
+        }
     }
-    if(count1>=n/2){
-      cout<<"1 "<<lead1;
-    }else{
-      cout<<"2 "<<lead2;
-    }
 
+    printf ("%d %d\n", winner, max_lead);
     return 0;
 }
